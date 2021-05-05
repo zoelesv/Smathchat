@@ -1,0 +1,73 @@
+@keyframes move {
+                from {
+                    left: 0%;
+                }
+                to {
+                    left: 10%;
+                }
+            }
+
+h1 {
+                position: relative;
+                animation-name: move;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+
+.item {
+    display: inline-block;
+    width: 30%;
+}
+.boo {
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+  position:relative;
+}
+/*===for desktop*/
+@media (min-width: 700px) {
+  .boo { height: 100%;
+  background-color: white;
+  width: 100%;}
+}
+
+.cards {
+  background-color: black;
+  width: 100%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 90vh;
+  /*align-items: stretch;*/
+}
+/*===for desktop===*/
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+
+textarea {
+    min-height: 150px;
+}
+
+#app {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#problem {
+     font-size: 72px;
+}
+
+#winner {
+     font-size: 72px;
+     color: green;
+}
+
+.incorrect {
+     color: red;
+}

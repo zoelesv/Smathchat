@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="alert alert-dismissible alert-success">
+          <strong>Well done!</strong> Here is your progress.
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+    </div>
+    <div>
+        <a class="dropdown-item" href="#addition1">Addition 1 Digit + 1 Digit</a>
+              <a class="dropdown-item" href="#addition2">Addition up to 2 Digit</a>
+              <a class="dropdown-item" href="#multiplication">Multiplication</a>
+        <div id="addition1" style="margin-left:20px;">
+            <div class="badge badge-success">Addition 1 Digit + 1 Digit</div>
+        {% for record in record1 %}
+                    <div class="row">
+                        <div class="col" style="border-right: 1px solid #8E8E93;"><div style="margin-left:5px;">{{record.user.username}}</div></div>
+                        <div class="col">{{record.seconds}}s</div>
+                        <div class="col text-secondary" style="font-size: 10px;">{{record.timestamp}}</div>
+                    </div>
+                {%endfor%}
+            </div>
+        <div id="addition2" style="margin-left:20px;">
+            <div class="badge badge-success">Addition up to 2 Digit</div>
+        {% for record in record2 %}
+                    <div class="row">
+                        <div class="col" style="border-right: 1px solid #8E8E93;"><div style="margin-left:5px;">{{record.user.username}}</div></div>
+                        <div class="col">{{record.seconds}}s</div>
+                        <div class="col text-secondary" style="font-size: 10px;">{{record.timestamp}}</div>
+                    </div>
+                {%endfor%}
+            </div>
+        <div id="multiplication" style="margin-left:20px;">
+            <div class="badge badge-success">Multiplication</div>
+        {% for record in record3 %}
+                    <div class="row">
+                        <div class="col" style="border-right: 1px solid #8E8E93;"><div>{{record.user.username}}</div></div>
+                        <div class="col">{{record.seconds}}s</div>
+                        <div class="col text-secondary" style="font-size: 10px;">{{record.timestamp}}</div>
+                    </div>
+                {%endfor%}
+            </div>
+    </div>
+
+{% endblock %}

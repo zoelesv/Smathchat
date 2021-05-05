@@ -1,0 +1,238 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="card-group">
+        <!--first card for the math problem-->
+        <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'index' %}"><small>< Back</small></a>
+                    <h5 class="card-title">Addition</h5>
+                    <p class="badge badge-pill badge-warning">Get 10 answers correct in a row to win.</p>
+                    <div id="app"/>
+                </div>
+                <script type="text/babel">
+                    class App extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = {
+                                num1: 10,
+                                num2: 10,
+                                response: "",
+                                score: 0,
+                                incorrect: false,
+                                time: {},
+                                seconds: 0,
+                                run: 1
+                            };
+                            this.timer = 0;
+                            this.startTimer = this.startTimer.bind(this);
+                            this.count = this.count.bind(this);
+                            this.stopTimer = this.stopTimer.bind(this);
+                            this.restart =this.restart.bind(this);
+                        }
+
+                        secondsToTime(secs){
+                            let hours = Math.floor(secs / (60 * 60));
+
+                            let divisor_for_minutes = secs % (60 * 60);
+                            let minutes = Math.floor(divisor_for_minutes / 60);
+
+                            let divisor_for_seconds = divisor_for_minutes % 60;
+                            let seconds = Math.ceil(divisor_for_seconds);
+
+                            let obj = {
+                              "h": hours,
+                              "m": minutes,
+                              "s": seconds
+                            };
+                            return obj;
+                          }
+
+                          componentDidMount() {
+                            let timeVar = this.secondsToTime(this.state.seconds);
+                            this.setState({ time: timeVar });
+                          }
+
+                          startTimer() {
+                          //if run:true run the timer
+                              if (this.timer == 0 && this.state.run == 1) {
+                                  this.timer = setInterval(this.count, 1000);}
+                          }
+
+                          stopTimer() {
+                          //Clear interval to stop counting
+                            this.timer = clearInterval(this.timer);
+                            //makes the POST request to send record data
+                            const s = this.state.seconds;
+
+                            fetch('/record/addition2', {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                        "Authorization": `AUTHORIZATION_KEY`,
+                                        "Content-Type": 'application/json'
+                                    },
+                                body: JSON.stringify(s),
+                                }).then(function(response) {
+                                    return response.json()
+                                }).then(function(body) {
+                                    console.log("data sent");
+                                });
+                          }
+
+
+                          count() {
+                            // Remove one second, set state so a re-render happens.
+                            let seconds = this.state.seconds + 1;
+                            this.setState({
+                              time: this.secondsToTime(seconds),
+                              seconds: seconds,
+                            });
+                          }
+
+                        restart = (event) =>{
+                          //Clear
+                            let score = 0;
+                            this.setState({
+                                score: 0,
+                            });
+
+                            window.location.reload();
+
+                          }
+
+
+                        render() {
+                            if (this.state.score === 10 ) {
+                                return this.renderWinnerScreen();
+                            }
+                            else {
+                                return this.renderProblem();
+                            }
+                        }
+
+                        renderWinnerScreen() {
+                            return (
+                            <div>
+                                <div id="winner">You won!</div>
+                                <div>🕒 {this.state.time.m} min : {this.state.time.s} sec</div>
+                                {this.stopTimer()}
+                                <button id="save" class="btn btn-success" onClick={this.restart} >Save and restart</button>
+                            </div>
+                            );
+                        }
+
+                        renderProblem() {
+                            return (
+                            <div>
+                                <div className={this.state.incorrect ? "incorrect" : ""} id="problem">{this.state.num1} + {this.state.num2}</div>
+                                <input onKeyPress={this.inputKeyPress} onChange={this.updateResponse} autoFocus={true} value={this.state.response} />
+                                <div class="font-weight-bold">Score: {this.state.score}</div>
+                                <div>🕒{this.state.time.m} min : {this.state.time.s} sec</div>
+                                {this.startTimer()}
+                            </div>);
+                        }
+
+                        inputKeyPress = (event) => {
+                            if (event.key === "Enter") {
+                                const answer = parseInt(this.state.response);
+                                if (answer === this.state.num1 + this.state.num2) {
+                                    // User got question right
+                                    this.setState(state => ({
+                                        score: state.score + 1,
+                                        response: "",
+                                        num1: Math.ceil(Math.random() * 100),
+                                        num2: Math.ceil(Math.random() * 100),
+                                        incorrect: false
+                                    }));
+                                } else {
+                                    // User got question wrong
+                                    this.setState(state => ({
+                                        score: state.score - 1,
+                                        incorrect: true,
+                                        response: ""
+                                    }));
+                                }
+                            }
+                        }
+
+                        updateResponse = (event) => {
+                            this.setState({
+                                response: event.target.value
+                            });
+                        }
+                    }
+
+                    ReactDOM.render(<App />, document.querySelector("#app"));
+
+                </script>
+                <div> 🏆Championship</div>
+                {% for record in record %}
+                    <div class="row">
+                        <div class="col" style="border-right: 1px solid #8E8E93;">{{record.user.username}}</div>
+                        <div class="col">{{record.seconds}}s</div>
+                        <div class="col text-secondary" style="font-size: 10px;">{{record.timestamp}}</div>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+        <!--second card for motivation-->
+        <div class="card">
+                <div class="boo">{% load static %}
+                <img src="{% static 'chat/giphy.gif'%}" class="figure-img img-fluid"></div>
+        </div>
+        {% if user.is_authenticated %}
+            <!--third card for the chat log-->
+            <div class="card">
+                {% load static %}
+                <div class="card-body" style="background-image: url({% static 'chat/Harvard.jpg'%});">
+                    <textarea id="chat-log" rows="12" class="mt-2 form-control"></textarea><br>
+                    <input id="chat-message-input" type="text" class="mt-2 form-control" placeholder="Let's Smath chat!"><br>
+                    <input id="chat-message-submit" type="button" value="Send" class="btn btn-primary">
+                {{ username|json_script:"username" }}
+                <script>
+                    const roomName = 'addition'
+                    const username = '@' + JSON.parse(document.getElementById('username').textContent) + ':';
+
+                    const chatSocket = new WebSocket(
+                        'ws://'
+                        + window.location.host
+                        + '/ws/chat/'
+                        + roomName
+                        + '/'
+                    );
+
+                    chatSocket.onmessage = function(e) {
+                        const data = JSON.parse(e.data);
+                        document.querySelector('#chat-log').value += (data.message + '\n');
+                    };
+
+                    chatSocket.onclose = function(e) {
+                        console.error('Chat socket closed unexpectedly');
+                    };
+
+                    document.querySelector('#chat-message-input').focus();
+                    document.querySelector('#chat-message-input').onkeyup = function(e) {
+                        if (e.keyCode === 13) {  // enter, return
+                            document.querySelector('#chat-message-submit').click();
+                        }
+                    };
+
+                    document.querySelector('#chat-message-submit').onclick = function(e) {
+                        const messageInputDom = document.querySelector('#chat-message-input');
+                        const message = username + messageInputDom.value;
+                        chatSocket.send(JSON.stringify({
+                            'message': message
+                        }));
+                        messageInputDom.value = '';
+                    };
+                </script>
+
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1 class="p-3 mb-2 bg-info text-dark" style="width: 90%;">Zoom, zoom, zoom, we're going to the moon!</h1>
+    <h2 class="text-muted" style="margin-left: 10px; font-size: 20px;">You got this, let's work on</h2>
+    {% if message %}
+        <div class="badge badge-danger">{{ message }}</div>
+    {% endif %}
+    <div class="list-group">
+        <a class="d-inline p-2 bg-dark text-white" id="addition1" href="{% url 'addition1' %}">Addition 1 Digit + 1 Digit</a>
+        <a class="d-inline p-2 bg-dark text-white" id="addition2" href="{% url 'addition2' %}">Addition up to 2 Digit</a>
+        <a class="d-inline p-2 bg-dark text-white" id="multiplication" href="{% url 'multiplication' %}">Multiplication </a>
+        <a class="list-group-item list-group-item-action disabled">Doubling and Halving (Coming soon)</a>
+        <a class="list-group-item list-group-item-action disabled">Percents (Coming soon)</a>
+        <a class="list-group-item list-group-item-action disabled">Decimals (Coming soon)</a>
+        <a class="list-group-item list-group-item-action disabled">Fractions (Coming soon)</a>
+    </div>
+
+
+    <script>
+        document.querySelector('#addition').onclick = function(e) {
+            window.location.pathname = '/chat/' + addition + '/';
+        };
+        document.querySelector('#multiplication').onclick = function(e) {
+            window.location.pathname = '/chat/' + multiplication + '/';
+        };
+    </script>
+{% endblock %}
+
