@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 #DEBUG = os.environ.get('DEBUG_VALUE', '') != 'False'
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ["localhost", "smathchat.herokuapp.com"]
 
 
 # Application definition
@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'finalproject.urls'
+ROOT_URLCONF = 'smathchat.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'finalproject.wsgi.application'
+WSGI_APPLICATION = 'smathchat.wsgi.application'
 
 
 # Database
@@ -129,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-ASGI_APPLICATION = "finalproject.routing.application"
+ASGI_APPLICATION = "smathchat.routing.application"
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
