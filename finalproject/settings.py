@@ -131,12 +131,16 @@ STATIC_URL = '/static/'
 ASGI_APPLICATION = "finalproject.routing.application"
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        #'BACKEND' : 'channels.layers.InMemoryChannelLayer'
         #'BACKEND': 'channels_redis.core.RedisChannelLayer',
         #'CONFIG': {
             #"hosts": [('127.0.0.1', 6379)],
         },
-    }
+    },
+}
 
 
 # Configure Django App for Heroku.
