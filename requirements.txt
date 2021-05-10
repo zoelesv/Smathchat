@@ -1,4 +1,4 @@
 django
-U channels
+channels
 channels_redis
 django-heroku
