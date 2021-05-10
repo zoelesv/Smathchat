@@ -4,3 +4,6 @@ channels_redis
 daphne
 redis
 django-heroku
+whitenoise
+gunicorn
+dj-database-url
