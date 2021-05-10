@@ -1,7 +1,6 @@
 django
 channels
 channels_redis
-asgi-redis
 daphne
 redis
 django-heroku
