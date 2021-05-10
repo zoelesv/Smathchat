@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 
 import os
+import django
+from channels.routing import get_default_application
 #import channels.asgi
 #from django.core.asgi import get_asgi_application
 #from channels.routing import ProtocolTypeRouter
@@ -22,20 +24,20 @@ import os
 #channel_layer = channels.asgi.get_channel_layer()
 #application = get_asgi_application()
 
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from django.core.asgi import get_asgi_application
-import chat.routing
+#from channels.auth import AuthMiddlewareStack
+#from channels.routing import ProtocolTypeRouter, URLRouter
+#from django.core.asgi import get_asgi_application
+#import chat.routing
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "smathchat.settings")
 django.setup()
-#application = get_default_application()
+application = get_default_application()
 
-application = ProtocolTypeRouter({
-  "http": get_asgi_application(),
-  "websocket": AuthMiddlewareStack(
-        URLRouter(
-            chat.routing.websocket_urlpatterns
-        )
-    ),
-})
+#application = ProtocolTypeRouter({
+  #"http": get_asgi_application(),
+  #"websocket": AuthMiddlewareStack(
+        #URLRouter(
+            #chat.routing.websocket_urlpatterns
+        #)
+    #),
+#})
