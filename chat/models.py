@@ -7,6 +7,7 @@ class User(AbstractUser):
 
 # Record model
 class Record(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     seconds = models.IntegerField()
