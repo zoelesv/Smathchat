@@ -21,12 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7!8obg90ni0&3mkd9f*g-ym75wt(vy!*xw$a%%&sdj#p2d)e9z'
+#SECRET_KEY = '7!8obg90ni0&3mkd9f*g-ym75wt(vy!*xw$a%%&sdj#p2d)e9z'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '7!8obg90ni0&3mkd9f*g-ym75wt(vy!*xw$a%%&sdj#p2d)e9z']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+export DJANGO_DEBUG=False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -128,9 +131,14 @@ STATIC_URL = '/static/'
 ASGI_APPLICATION = "finalproject.routing.application"
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+        'BACKEND': 'channels_redis.core.RedisChannelLayer'
+        #'CONFIG': {
+            #"hosts": [('127.0.0.1', 6379)],
         },
     }
 }
+
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())

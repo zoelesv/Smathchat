@@ -94,3 +94,4 @@ class ChatTests(ChannelsLiveServerTestCase):
     @property
     def _chat_log_value(self):
         return self.driver.find_element_by_css_selector('#chat-log').get_property('value')
+

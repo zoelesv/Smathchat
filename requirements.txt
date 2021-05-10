@@ -1,2 +1,4 @@
--U channels
+django
+U channels
 channels_redis
+django-heroku
