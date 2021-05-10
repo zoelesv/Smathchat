@@ -22,11 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = '7!8obg90ni0&3mkd9f*g-ym75wt(vy!*xw$a%%&sdj#p2d)e9z'
-SECRET_KEY = os.environ.get['DJANGO_SECRET_KEY', '7!8obg90ni0&3mkd9f*g-ym75wt(vy!*xw$a%%&sdj#p2d)e9z']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+#DEBUG = os.environ.get('DEBUG_VALUE', '') != 'False'
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
@@ -139,5 +140,19 @@ CHANNEL_LAYERS = {
 
 
 # Configure Django App for Heroku.
-import django_heroku
-django_heroku.settings(locals())
+#import django_heroku
+#django_heroku.settings(locals())
+
+# Add the following at the end of settings.py
+# Settings below are used for deployment
+# Note that AWS settings are not required, but was needed for my application
+if not DEBUG:
+    import django_heroku
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_FILE_OVERWRITE = False
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    S3_URL = f"http://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    django_heroku.settings(locals())
