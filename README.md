@@ -84,23 +84,19 @@ All webpages of the project are mobile-responsive.
 - Make and apply migrations by running `python manage.py makemigrations` and `python manage.py migrate`
 - Run the web  ` python manage.py runserver`
 - Go to the website address and register an account.
+Deploy on heroku
 - heroku login
 - git clone
 - cd
-- heroku create 
-- disable the collectstatic during a deploy
-
-heroku config:set DISABLE_COLLECTSTATIC=1
-- deploy
-
-git push heroku main
-
--heroku run python manage.py migrate
-heroku ps:scale web=1:free worker=1:free
-- $ heroku addons:create heroku-postgresql
-$ heroku addons:create heroku-redis
-heroku config:set DEBUG_VALUE="False" # yes, "False" as a string!
-$ heroku config:set SECRET_KEY="your_secret_key_in_strings"
+- heroku create
+- Disable the collectstatic during a deploy `heroku config:set DISABLE_COLLECTSTATIC=1`
+- deploy `git push heroku main`
+- `heroku run python manage.py migrate`
+- `heroku ps:scale web=1:free worker=1:free`
+- `heroku addons:create heroku-postgresql`
+- `heroku addons:create heroku-redis`
+- `heroku config:set DEBUG_VALUE="False"` # yes, "False" as a string!
+- `heroku config:set SECRET_KEY="your_secret_key_in_strings"`
 
 
 
