@@ -203,7 +203,7 @@
                 {{ username|json_script:"username" }}
                 <script>
                     const roomName = 'addition1'
-                    const username = '@' + JSON.parse(document.getElementById('username').textContent) + ':';
+                    const username = '@' + JSON.parse(document.getElementById('username').textContent) + ': ';
 
                     const chatSocket = new WebSocket(
                         'ws://'

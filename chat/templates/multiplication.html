@@ -194,7 +194,7 @@
                 {{ username|json_script:"username" }}
                 <script>
                     const roomName = 'multiplicaition'
-                    const username = '@' + JSON.parse(document.getElementById('username').textContent) + ':';
+                    const username = '@' + JSON.parse(document.getElementById('username').textContent) + ': ';
 
                     const chatSocket = new WebSocket(
                         'ws://'

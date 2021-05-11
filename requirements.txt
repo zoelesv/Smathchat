@@ -7,3 +7,4 @@ django-heroku
 whitenoise
 gunicorn
 dj-database-url
+Twisted[tls,http2]
