@@ -1,1 +1,1 @@
-web: daphne smathchat.asgi:channel_layer --port $PORT --bind 0.0.0.0 -v2
+web: daphne -b 0.0.0.0 -p 8001 smathchat.asgi:application
