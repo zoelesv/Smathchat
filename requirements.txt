@@ -4,7 +4,7 @@ channels_redis
 daphne
 redis
 django-heroku
+django_redis
 whitenoise
-gunicorn
 dj-database-url
 Twisted[tls,http2]
