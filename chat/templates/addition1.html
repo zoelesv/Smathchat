@@ -205,9 +205,12 @@
                     const roomName = 'addition1'
                     const username = '@' + JSON.parse(document.getElementById('username').textContent) + ': ';
 
+                    // Correctly decide between ws:// and wss://
+                    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+
                     const chatSocket = new WebSocket(
-                        'wss://smathchat.herokuapp.com'
-                        //+ smathchat
+                        ws_scheme + '://'
+                        + window.location.host
                         + '/ws/chat/'
                         + roomName
                         + '/'
