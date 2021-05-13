@@ -206,8 +206,8 @@
                     const username = '@' + JSON.parse(document.getElementById('username').textContent) + ': ';
 
                     const chatSocket = new WebSocket(
-                        'wss://'
-                        + window.location.host
+                        'wss://smathchat.herokuapp.com'
+                        //+ smathchat
                         + '/ws/chat/'
                         + roomName
                         + '/'
