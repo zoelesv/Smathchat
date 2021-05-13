@@ -120,7 +120,7 @@
                                 <div id="winner">You won!</div>
                                 <div>🕒 {this.state.time.m} min : {this.state.time.s} sec</div>
                                 {this.stopTimer()}
-                                <button id="save" class="btn btn-success" onClick={this.restart} >Save and restart</button>
+                                <button id="save" className="btn btn-success" onClick={this.restart} >Save and restart</button>
                             </div>
                             );
                         }
@@ -130,7 +130,7 @@
                             <div>
                                 <div className={this.state.incorrect ? "incorrect" : ""} id="problem">{this.state.num1} + {this.state.num2}</div>
                                 <input onKeyPress={this.inputKeyPress} onChange={this.updateResponse} autoFocus={true} value={this.state.response} />
-                                <div class="font-weight-bold">Score: {this.state.score}</div>
+                                <div className="font-weight-bold">Score: {this.state.score}</div>
                                 <div>🕒{this.state.time.m} min : {this.state.time.s} sec</div>
                                 {this.startTimer()}
                             </div>);

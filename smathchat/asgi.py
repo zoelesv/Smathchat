@@ -29,11 +29,12 @@ application = ProtocolTypeRouter({
 
     # WebSocket chat handler
     "websocket": AuthMiddlewareStack(
-        URLRouter([
-            url(r"^chat/$", ChatConsumer.as_asgi())
-        ])
+        URLRouter(
+            chat.routing.websocket_urlpatterns
+        )
     ),
 })
 
         #URLRouter(
             #chat.routing.websocket_urlpatterns
+            #url(r"^chat/$", ChatConsumer.as_asgi())
