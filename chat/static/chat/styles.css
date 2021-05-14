@@ -20,7 +20,7 @@ h1 {
 }
 .boo {
   background-color: dodgerblue;
-  display: flex;
+  display: none;
   align-items: center;
   height: 50vh;
   width: 100%;
@@ -29,6 +29,7 @@ h1 {
 /*===for desktop*/
 @media (min-width: 700px) {
   .boo { height: 100%;
+  display: block;
   background-color: white;
   width: 100%;}
 }
