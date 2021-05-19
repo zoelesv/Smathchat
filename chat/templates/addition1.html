@@ -176,11 +176,11 @@
                 </script>
 
 
-                <div> 🏆Championship</div>
+                <div> 🏆 Championship</div>
                 {% for record in record %}
                     <div class="row">
-                        <div class="col-7" style="border-right: 1px solid #8E8E93;">{{record.user.username}}</div>
-                        <div class="col">{{record.seconds}}s</div>
+                        <div class="col-6" style="border-right: 0.8px solid #8E8E93; font-size: 12px;">{{record.user.username}}</div>
+                        <div class="col-2" style="font-size: 12px;">{{record.seconds}}s</div>
                         <div class="col text-secondary" style="font-size: 10px;">{{record.timestamp}}</div>
                     </div>
                 {%endfor%}
