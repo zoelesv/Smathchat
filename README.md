@@ -1,10 +1,10 @@
 # ZoomLee
 
-# **Final project - Smathchat**
+# **Smathchat**
 
 ## Description
 
-My final project - Smathchat is a game-like web application where users can solve different math problems and chat together. The app also records the time users need to complete a math challenge and shows 3 fastest students in the championship chart. In order to do this, I use the fetch() method to get this.state value of the time in the React app and send data via a POST request to an API route then save data in the database. The chat app allows them to chat in real time and to learn from each other and make study more fun. I got this idea for my final project from my own study experience when my classmates needed help to solve math problems. It's fair to say that students often learn from peers more than from teachers.
+Smathchat is a game-like web application where users can solve different math problems and chat together. The app also records the time users need to complete a math challenge and shows 3 fastest students in the championship chart. In order to do this, I use the fetch() method to get this.state value of the time in the React app and send data via a POST request to an API route then save data in the database. The chat app allows them to chat in real time and to learn from each other and make study more fun. I got this idea for my final project from my own study experience when my classmates needed help to solve math problems. It's fair to say that students often learn from peers more than from teachers.
 
 
 The project was built using Django as a backend framework (with Django Channels) and JavaScript and React as a frontend programming language. All the users information are saved in database (SQLite)
