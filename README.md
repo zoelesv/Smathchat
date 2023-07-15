@@ -1,6 +1,6 @@
 # **Smathchat**
 
-![YAP](https://giphy.com/embed/atpu7tQWSWOE6GeeEy)
+![Joint Morph-Syntactic Processing](screenshot.png)
 
 ## Description
 
