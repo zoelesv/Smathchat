@@ -1,6 +1,6 @@
-# Zoe
-
 # **Smathchat**
+
+![YAP](https://giphy.com/embed/atpu7tQWSWOE6GeeEy)
 
 ## Description
 
@@ -84,6 +84,7 @@ All webpages of the project are mobile-responsive.
 - Make and apply migrations by running `python manage.py makemigrations` and `python manage.py migrate`
 - Run the web  ` python manage.py runserver`
 - Go to the website address and register an account.
+
 Deploy on heroku
 - heroku login
 - git clone
