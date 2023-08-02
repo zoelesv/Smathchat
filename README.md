@@ -63,9 +63,14 @@ All webpages of the project are mobile-responsive.
 
 ## Installation
 - `cd` into the project directory.
-- Start a virtual machine `py -m venv venv`
+- If you use Linux, first clone repo the specific directory then make a venv `py -m venv envname`
+- Start a virtual machine if you are in Windows `py -m venv venv`
                             `venv\Scripts\activate`.
                             Install Django `pip install django` and Channels `python -m pip install -U     channels` in the virtual machine.
+
+- Install Docker for linux <a href="https://docs.docker.com/engine/install/ubuntu/">Docker for linux</a>
+- Install Redis server for linux if not installed <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-22-04#step-2-testing-redis">Redis server for linux</a>
+- Also after installing redis server in linux, do no forget to add redis to environment path variables
 - Install Docker to install and run Redis. Start a Redis server (if not available):
     ` docker run -p 6379:6379 -d redis:5`
     ` python -m pip install channels_redis`
